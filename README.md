@@ -25,7 +25,13 @@ When I cooperated with Adam Gaoo, we discovered that timbre feature can be very 
 ### 1.2 Process lyrics for training data
 Apply PCA to Document To Term matrix. Each PC stands for some "topic" to some degree. (Similar to applying PCA in stock price data, each PC stands for a specific segment somehow.) I chose this in place of topic modeling because the latter performs poor in that too many topics contains only few songs. In addition, matching a music audio pattern of a song to a topic can not gaurantee the accuracy in the final word recommendation or prediction.
 
-However, using PCA has many benefits:
+To justify the usage of PCA, let's see how the words are correlated. First we define the distance of word pairs as: logorithm of reciprocal of cosine distance. I tried several times and found under this measure of distance, the word can be best saperated into clusters. With MDS we can inspect the word distance:
+
+![image](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj4-Guanzy2224/master/doc/Word%20Distance%20(2).png)
+
+From the picture it is easy to see four clusters of words and not surprising that they correspond to English, Spanish, German and French. In addition, I found that in the cloud of English words, it is approximately alingned in a line, which is a very meaningful and useful fact. This fact indicates that there is a "chain relation" between words: a is frequently used with b, c with b, d with c, and so forth. Therefore, every word can be approximately projected to an R1 space(number axis) and thus words are "continuous"! Every song corresponds to an interval of this number axis, or more precisely, a distribution on this number axis. Inspired by this, it is easy to think of PCA, which does the projection job.
+
+In addition, using PCA has many benefits:
 
 a. reduce dimension: from 5000 to 50
 
