@@ -18,6 +18,7 @@ As could be easily read from the r code in this repo, I chose several time seque
 I did this with hope that these features can capture the emotional style pattern of songs, whereby we can further infer the possible lyrics.
 
 When I cooperated with Adam Gaoo, we discovered that timbre feature can be very useful in distinguishing topics of each songs (the topic tags of each song is from LDA topic modelling). These features are also kept alghough we abandoned topicmodelling.
+
 ![image](https://raw.githubusercontent.com/Guanzy2224/ADS-Project-4/master/doc/MDS%20of%20timbre%20feature.png)
 
 ### 1.2 Process lyrics for training data
