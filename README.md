@@ -1,8 +1,6 @@
 # ADS-Project-4 Lyrics Recommender
 
-## Project: Lyrics Recommender
-
-## Project Description
+## Description
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 In short:Given some music audio features of a song, this project generate a "machine" that provides lyrics recommendations.
@@ -12,7 +10,7 @@ Term: Fall 2016
 + Name: Guanzhong You
 + Uni : gy2224
 
-## Project Idea
+## Idea
 
 ### 1.1 Process audio features
 As could be easily read from the r code in this repo, I chose several time sequence statistics and music pattern statistics as features(X's). Each song has 156 dimensions of X's. They include: pitchs, loudness, segment length, periodogram of pitchs, loudness, segment length, acf/pacf of pitchs, loudness, segment length, and so on.
