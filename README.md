@@ -15,30 +15,33 @@ Term: Fall 2016
 ## Project Idea
 
 ### 1.1 Process audio features
-As could be easily read from the r code in this repo, this part I chooses several time sequence features and music patterns as features(X's). Each song has 156 dimensions of X's. They includes: pitchs, loudness, segment length, periodogram of pitchs, loudness, segment length, acf/pacf of pitchs, loudness, segment length, and so on.
+As could be easily read from the r code in this repo, I chose several time sequence statistics and music pattern statistics as features(X's). Each song has 156 dimensions of X's. They include: pitchs, loudness, segment length, periodogram of pitchs, loudness, segment length, acf/pacf of pitchs, loudness, segment length, and so on.
 
-I did this with hope that these features can capture the emotional style of this songs.
+I did this with hope that these features can capture the emotional style pattern of songs, whereby we can further infer the possible lyrics.
 
-When cooperated with Adam Gaoo, we discovered that timbre feature can be very useful in distinguishing topics of each songs (the topic tags of each song is from LDA topic modelling model). So these features is also kept alghough we abandomed topicmodelling finally.
+When I cooperated with Adam Gaoo, we discovered that timbre feature can be very useful in distinguishing topics of each songs (the topic tags of each song is from LDA topic modelling). These features are also kept alghough we abandoned topicmodelling.
 ![image](https://raw.githubusercontent.com/Guanzy2224/ADS-Project-4/master/doc/MDS%20of%20timbre%20feature.png)
 
 ### 1.2 Process lyrics for training data
-Apply pca to document to term matrix. Each pc stands for a "topic" somehow. I chose this in place of topic modeling because the latter perform poor in that too many topics contains only few songs. In addition, match music audio pattern with topics can not gaurantee the accuracy in the final word prediction or recommendation.
+Apply PCA to Document To Term matrix. Each PC stands for some "topic" to some degree. (Similar to applying PCA in stock price data, each PC stands for a specific segment somehow.) I chose this in place of topic modeling because the latter performs poor in that too many topics contains only few songs. In addition, matching a music audio pattern of a song to a topic can not gaurantee the accuracy in the final word recommendation or prediction.
 
+However, using PCA has many benefits:
 
+a. reduce dimension: from 5000 to 50
+
+b. avoid correlation: each column in the dtm matrix is correlated (some words tends to show up together and not show up together), and predicting multi dimension Y with its correlation well modeled is a hard work. PCA make each Y orthogonal so that we can either predict Y independently or together.
+
+c. transform the data from a few integers to real number: directly using DTM matrix as Y will result in many problems. One of them is that the poisson-like data has only few levels (1,2,3,...) and the matrix is sparse(too many 0's). PCA "spreads" the DTM to different real numbers and thus better for fitting the model.
 
 ### 2. Train neural network
-As simple as possible, I choose nnet package and set the hidden layer only a few nodes.
-Here Y is scores from PCA of each songs ( choose first 50 scores, so Y is multi dimension (50));
+To make life easier, I chose nnet package and set the hidden layer to be containing only a few nodes(20 or so).
+Here Y is scores from PCA of each songs ( choose first 50 scores, so Y is multi dimension (50), this data can be handled well by nnet);
 X is music features (156 real number for each song)
 
 ### 3. Make recommendations for testing data
-Use trained NNET to take in new X's and predict scores, then times scores with loadings and get the predicted word frequency matrix.
+Use the trained NNET model and take in new X's to predict scores, then time scores with loadings and get the predicted word frequency matrix.
 
 ![image](https://raw.githubusercontent.com/Guanzy2224/ADS-Project-4/master/doc/%E5%B9%BB%E7%81%AF%E7%89%871.PNG)
 
 ### CoWorkers
-Adam Gaoo
-ChenCheng, Nicole, Jiang
-Skanda, V
-WenHang Bao
+Adam Gaoo; ChenCheng, Nicole, Jiang; Skanda, V; WenHang Bao
