@@ -30,18 +30,21 @@ When I cooperated with Adam Gaoo, we discovered that timbre feature can be very 
 For time series related features, it is hard to compare the time series directly without any feature extraction since the lenth of each song is different and the meaning of each time point in each song is not identical and hardly compariable. Therefore I came up with the idea to compare the pattern of each time series. To measure the pattern, I chose ACF, PACF and Periodogram. First let's see the raw data of time series (take loudness as example):
 
 ![image](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj4-Guanzy2224/master/doc/Loudness%20Time%20Series.png)
-**Loudness_Max of 9 Songs
+**Loudness_Max of 9 Songs**
 
 From the comparison of the 9 songs' loudness series, it is appearantly that there are many different patterns. Some song has a jump, some songs varies in a small range, some songs have some seasonal-like pattern. So this indicates the feasibility of using time series tools. Let's see them:
 
 ![image](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj4-Guanzy2224/master/doc/ACF.png)
-**ACF of loudness
+
+**ACF of loudness**
 
 ![image](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj4-Guanzy2224/master/doc/PACF.png)
-**PACF of loudness
+
+**PACF of loudness**
 
 ![image](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj4-Guanzy2224/master/doc/Periodagram.png)
-**Periodogram of loudness
+
+**Periodogram of loudness**
 
 Comparing the same 9 songs, I found that those patterns differ a lot among songs. This difference, I think, results from the eifferent music style pattern, which could be meaningful in lyrics selection. So I chose them to build connection between lyrics (with Neural Network as to be mentioned below). For ACF and PACF, I chose 15 lags. For periodogram, I chose 10 samples from 0.05 to 0.5.
 
