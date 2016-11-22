@@ -19,37 +19,37 @@ I did this with hope that these features can capture the emotional style pattern
 
 Now let's see how these features work:
 
-1. Timbre 
+#### 1. Timbre 
 
 When I cooperated with Adam Gaoo, we discovered that timbre feature can be very useful in distinguishing topics of each songs (the topic tags of each song is from LDA topic modelling). These features are also kept alghough we abandoned topicmodelling.
 
 ![image](https://raw.githubusercontent.com/Guanzy2224/ADS-Project-4/master/doc/MDS%20of%20timbre%20feature.png)
 
-2. Time series
+#### 2. Time series
 
 For time series related features, it is hard to compare the time series directly without any feature extraction since the lenth of each song is different and the meaning of each time point in each song is not identical and hardly compariable. Therefore I came up with the idea to compare the pattern of each time series. To measure the pattern, I chose ACF, PACF and Periodogram. First let's see the raw data of time series (take loudness as example):
 
 ![image](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj4-Guanzy2224/master/doc/Loudness%20Time%20Series.png)
-Loudness_Max of 9 Songs
+**Loudness_Max of 9 Songs
 
 From the comparison of the 9 songs' loudness series, it is appearantly that there are many different patterns. Some song has a jump, some songs varies in a small range, some songs have some seasonal-like pattern. So this indicates the feasibility of using time series tools. Let's see them:
 
 ![image](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj4-Guanzy2224/master/doc/ACF.png)
-ACF of loudness
+**ACF of loudness
 
 ![image](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj4-Guanzy2224/master/doc/PACF.png)
-PACF of loudness
+**PACF of loudness
 
 ![image](https://raw.githubusercontent.com/TZstatsADS/Fall2016-proj4-Guanzy2224/master/doc/Periodagram.png)
-Periodogram of loudness
+**Periodogram of loudness
 
 Comparing the same 9 songs, I found that those patterns differ a lot among songs. This difference, I think, results from the eifferent music style pattern, which could be meaningful in lyrics selection. So I chose them to build connection between lyrics (with Neural Network as to be mentioned below). For ACF and PACF, I chose 15 lags. For periodogram, I chose 10 samples from 0.05 to 0.5.
 
-Except loudness, I also included the ACF, PACF, Periodogram of pitchs and length of segment. For pitches, I preprocessed it as follow: for each segment, find the largest pitch echo within the 12 numbers, then put the sequence number (an integer from 1 to 12) as the pitch of this segment. Why do that?[https://en.wikipedia.org/wiki/Chroma_feature]. For segment length, I think those statistics is enough to capture the pattern in rythm.
+Except loudness, I also included the ACF, PACF, Periodogram of **pitchs** and **length of segment**. For pitches, I preprocessed it as follow: for each segment, find the largest pitch echo within the 12 numbers, then put the sequence number (an integer from 1 to 12) as the pitch of this segment. [(Why do that?)](https://en.wikipedia.org/wiki/Chroma_feature). For segment length, I think those statistics is enough to capture the pattern in rythm.
 
-3. Others
+#### 3. Others
 
-For each song, I also include some other features like average beats per bar, average time lenth per segment, and so on.
+For each song, I also include some other features like average **beats per bar**, **average time lenth per segment**, and so on.
 
 ### 1.2 Process lyrics for training data
 Apply PCA to Document To Term matrix. Each PC stands for some "topic" to some degree. (Similar to applying PCA in stock price data, each PC stands for a specific segment somehow.) I chose this in place of topic modeling because the latter performs poor in that too many topics contains only few songs. In addition, matching a music audio pattern of a song to a topic can not gaurantee the accuracy in the final word recommendation or prediction.
@@ -77,6 +77,9 @@ X is music features (156 real number for each song)
 Use the trained NNET model and take in new X's to predict scores, then time scores with loadings and get the predicted word frequency matrix.
 
 ![image](https://raw.githubusercontent.com/Guanzy2224/ADS-Project-4/master/doc/%E5%B9%BB%E7%81%AF%E7%89%871.PNG)
+
+### Result
+Average rank is about 450~550 for English songs. (2000 training, 350 testing)
 
 ### CoWorkers
 Adam Gaoo; ChenCheng, Nicole, Jiang; Skanda, V; WenHang Bao
