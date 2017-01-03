@@ -85,4 +85,4 @@ Use the trained NNET model and take in new X's to predict scores, then time scor
 Average rank is about 450~550 for English songs. (2000 training, 350 testing)
 
 ### CoWorkers
-Adam Gaoo; ChenCheng, Nicole, Jiang; Skanda, V; WenHang Bao
+Yinxiang Gao; ChenCheng Jiang; Skanda Vishwanath; Wenhang Bao
